@@ -62,7 +62,13 @@ def generate_blog(request):
 def yt_title(link):
     yt = YouTube(link)
     title = yt.title
-    return title
+    foo = ''
+    for i in title:
+        if i.isalnum():
+            foo += i
+        else:
+            break
+    return foo
 
 
 
