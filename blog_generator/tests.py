@@ -11,15 +11,15 @@ class BlogAppTests(TestCase):
 
     def test_index_view_requires_login(self):
         response = self.client.get('/')
-        self.assertEqual(response.status_code, 302)  # Redirect to login page
+        self.assertEqual(response.status_code, 302)
 
         self.client.login(username='testuser', password='password')
         response = self.client.get('/')
-        self.assertEqual(response.status_code, 200)  # Should access the index
+        self.assertEqual(response.status_code, 200)
 
     def test_user_login(self):
         response = self.client.post('/login', {'username': 'testuser', 'password': 'password'})
-        self.assertEqual(response.status_code, 302)  # Redirect after successful login
+        self.assertEqual(response.status_code, 302)
 
     def test_user_signup(self):
         response = self.client.post('/signup', {
@@ -34,11 +34,11 @@ class BlogAppTests(TestCase):
     def test_user_logout(self):
         self.client.login(username='testuser', password='password')
         response = self.client.get('/logout')
-        self.assertEqual(response.status_code, 302)  # Redirect after logout
+        self.assertEqual(response.status_code, 302)
 
     def test_generate_blog_invalid_method(self):
         response = self.client.get('/generate-blog')
-        self.assertEqual(response.status_code, 405)  # Method not allowed
+        self.assertEqual(response.status_code, 405)
 
     @patch('blog_generator.views.YouTube')
     @patch('blog_generator.views.Groq')
